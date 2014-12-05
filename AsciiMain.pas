@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Menus, GFormSav, IniFiles;
+  StdCtrls, Menus, IniFiles;
 
 type
   TfrmAsciiMain = class(TForm)
@@ -18,7 +18,6 @@ type
     itm6Col: TMenuItem;
     itm7Col: TMenuItem;
     N81: TMenuItem;
-    FormSaver: TFormSaver;
     procedure FormActivate(Sender: TObject);
     procedure itmColClick(Sender: TObject);
   private
@@ -42,17 +41,21 @@ begin
   for i := 1 to 255 do
     lstAscii.Items.Add(IntToStr(i) + ' = ' + Chr(i));
 
+{
   SettingsFile := TIniFile.Create(FormSaver.IniFile + '.INI');
   lstAscii.Columns := SettingsFile.ReadInteger('AsciiList', 'Columns', 4);
   SettingsFile.Free;
+}
 end;
 
 procedure TfrmAsciiMain.itmColClick(Sender: TObject);
 begin
   lstAscii.Columns := (Sender as TMenuItem).Tag;
+{
   SettingsFile := TIniFile.Create(FormSaver.IniFile + '.INI');
   SettingsFile.WriteInteger('AsciiList', 'Columns', lstAscii.Columns);
   SettingsFile.Free;
+}
 end;
 
 end.
